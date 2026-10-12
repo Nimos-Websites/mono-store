@@ -1,0 +1,5 @@
+Navigating to https://kanso.knives
+Error: net::ERR_NAME_NOT_RESOLVED at https://kanso.knives/
+Call log:
+[2m  - navigating to "https://kanso.knives/", waiting until "load"[22m
+

@@ -1,0 +1,666 @@
+@import "tailwindcss";
+
+/*
+  MONO DESIGN SYSTEM v1.0
+  Single source of truth. Agents consume it; they do not edit it.
+  Every colour is a real material: limewash, oak, saddle leather, ink, brass, sawdust.
+*/
+
+:root {
+  /* MONO = DAF V3 brand law (see ../../MONO-DESIGN-LAW.md).
+     Alabaster paper, royal amethyst, brass. Poppins site-wide (Ben-locked). */
+  --steam: #f2f0eb;          /* alabaster — paper ground */
+  --ground: #f2f0eb;         /* alabaster */
+  --bone: #e6e2da;           /* alabaster-deep — recessed matte panel */
+  --ceramic: #e8e4dc;
+  --graphite: #16131c;       /* ink — headlines */
+  --signal: #2e003e;         /* royal amethyst — acts, accents, CTAs */
+  --signal-deep: #430d5e;    /* amethyst-mid — fills / hover */
+  --cool: #4a4356;           /* ink-soft — body copy */
+  --steel: #8a8278;          /* stone — captions */
+  --lamp: #b89968;           /* brass — rules, numerals, seams */
+  --amethyst-glow: #5b1b7c;  /* WebGL light + focus glow ONLY */
+  --line: rgba(46, 0, 62, 0.14);
+
+  --ink-70: #4a4356;
+  --ink-46: rgba(138, 130, 120, 0.9);
+  --hair: rgba(46, 0, 62, 0.14);
+
+  --on-dark: #f2f0eb;
+  --on-dark-64: rgba(242, 240, 235, 0.64);
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --pad: clamp(20px, 3.4vw, 64px);
+  --head-h: 72px;
+  --serif: var(--font-display), ui-serif, Georgia, serif;
+  --sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --mono: var(--font-mono), ui-monospace, monospace;
+}
+
+@theme inline {
+  --color-steam: var(--steam);
+  --color-ground: var(--ground);
+  --color-ceramic: var(--ceramic);
+  --color-bone: var(--bone);
+  --color-signal: var(--signal);
+  --color-signaldeep: var(--signal-deep);
+  --color-graphite: var(--graphite);
+  --color-cool: var(--cool);
+  --color-steel: var(--steel);
+  --color-lamp: var(--lamp);
+  --color-line: var(--line);
+  --color-graphite-70: var(--ink-70);
+  --color-graphite-46: var(--ink-46);
+  --color-on-dark: var(--on-dark);
+  --color-on-dark-64: var(--on-dark-64);
+  --font-sans: var(--sans);
+  --font-serif: var(--serif);
+  --font-mono: var(--mono);
+}
+
+@layer base {
+  * {
+    border-color: var(--hair);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--graphite);
+    font-family: var(--sans);
+    font-size: clamp(16px, 1.05vw, 18px);
+    line-height: 1.6;
+    font-feature-settings: "kern", "liga";
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--signal);
+    color: var(--ground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: balance;
+  }
+
+  img,
+  canvas,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+/* ─── COMPONENT LAYER ─── */
+/* Everything below is a component class. Declared inside @layer components so a
+   Tailwind utility (hidden, pt-[…], …) always wins. Do not hoist these out. */
+@layer components {
+
+/* ─── TYPE SCALE ─── */
+
+.display {
+  font-family: var(--serif);
+  font-size: clamp(58px, 12.5vw, 208px);
+  line-height: 0.84;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.title-l {
+  font-family: var(--serif);
+  font-size: clamp(42px, 7.4vw, 124px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+
+.title-m {
+  font-family: var(--serif);
+  font-size: clamp(30px, 3.7vw, 60px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.title-s {
+  font-family: var(--serif);
+  font-size: clamp(23px, 2.1vw, 34px);
+  line-height: 1.08;
+  letter-spacing: -0.014em;
+}
+
+.lede {
+  font-size: clamp(18px, 1.65vw, 25px);
+  line-height: 1.42;
+  letter-spacing: -0.011em;
+  color: var(--ink-70);
+}
+
+.body {
+  font-size: clamp(15px, 1.05vw, 17px);
+  line-height: 1.68;
+  color: var(--ink-70);
+}
+
+.body-lg {
+  font-size: clamp(17px, 1.3vw, 21px);
+  line-height: 1.58;
+  color: var(--ink-70);
+}
+
+.micro {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-46);
+}
+
+.mono {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+}
+
+/* Metadata only: captions, table headers, field labels, spec rows. Never a mini-heading. */
+.label {
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.3;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-46);
+  font-variant-numeric: tabular-nums;
+}
+
+.italic {
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+/* ─── LAYOUT ─── */
+
+.wrap {
+  width: 100%;
+  max-width: 1560px;
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+
+.wrap-narrow {
+  width: 100%;
+  max-width: 860px;
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+
+.band {
+  padding-block: clamp(64px, 9vw, 152px);
+  position: relative;
+}
+
+.band-tight {
+  padding-block: clamp(48px, 6vw, 96px);
+  position: relative;
+}
+
+.band-bone {
+  background: var(--steam);
+}
+
+.band-ink {
+  background: var(--graphite);
+  color: var(--on-dark);
+}
+
+.band-ink .lede,
+.band-ink .body,
+.band-ink .body-lg {
+  color: var(--on-dark-64);
+}
+
+.band-ink .label {
+  color: color-mix(in oklab, var(--on-dark) 52%, transparent);
+}
+
+.band-ink .rule,
+.band-ink .ledger {
+  border-color: color-mix(in oklab, var(--on-dark) 20%, transparent);
+}
+
+.band-mono {
+  background: var(--signal);
+  color: var(--ground);
+}
+
+.band-mono .lede,
+.band-mono .body {
+  color: color-mix(in oklab, var(--ground) 82%, transparent);
+}
+
+.band-mono .label {
+  color: color-mix(in oklab, var(--ground) 66%, transparent);
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--hair);
+  width: 100%;
+}
+
+/* ─── BUTTONS ─── */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  min-height: 54px;
+  padding: 0 32px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: 0;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 0.4s var(--ease),
+    color 0.4s var(--ease),
+    border-color 0.4s var(--ease),
+    transform 0.4s var(--ease);
+}
+
+.button-signal {
+  background: var(--signal);
+  color: var(--ground);
+}
+
+.button-signal:hover {
+  background: var(--signal-deep);
+}
+
+.button-ghost {
+  background: transparent;
+  color: var(--graphite);
+  border-color: color-mix(in oklab, var(--graphite) 34%, transparent);
+}
+
+.button-ghost:hover {
+  border-color: var(--graphite);
+  background: color-mix(in oklab, var(--graphite) 4%, transparent);
+}
+
+.button-light {
+  background: var(--ground);
+  color: var(--graphite);
+}
+
+.button-light:hover {
+  background: var(--on-dark);
+}
+
+.button-block {
+  display: flex;
+  width: 100%;
+}
+
+.arrow-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55em;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: inherit;
+  text-decoration: none;
+  padding-block: 6px;
+  border-bottom: 1px solid currentColor;
+  transition: gap 0.35s var(--ease), opacity 0.35s var(--ease);
+}
+
+.arrow-link:hover {
+  gap: 0.95em;
+}
+
+.arrow-link .arrow {
+  transition: transform 0.35s var(--ease);
+}
+
+.arrow-link:hover .arrow {
+  transform: translateX(2px);
+}
+
+/* ─── SPEC LEDGER ─── */
+
+.ledger {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--hair);
+}
+
+.ledger-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 15px;
+  border-bottom: 1px solid var(--hair);
+}
+
+.ledger-key {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-46);
+  flex: none;
+  padding-top: 2px;
+}
+
+/* Dossier ledgers carry full-sentence question keys. On narrow screens the
+   key stacks above the value instead of forcing the row wider than the
+   viewport (flex:none keys + 24px gap overflow 390px otherwise). */
+@media (max-width: 767px) {
+  .ledger-row-stack {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .ledger-row-stack .ledger-val {
+    text-align: left;
+  }
+}
+
+.band-ink .ledger-key {
+  color: color-mix(in oklab, var(--on-dark) 52%, transparent);
+}
+
+.band-mono .ledger-key {
+  color: color-mix(in oklab, var(--ground) 66%, transparent);
+}
+
+.ledger-val {
+  font-family: var(--sans);
+  font-size: clamp(15px, 1.15vw, 18px);
+  line-height: 1.45;
+  text-align: right;
+  color: var(--graphite);
+}
+
+.band-ink .ledger-val {
+  color: var(--on-dark);
+}
+
+/* ─── PANELS / MATERIAL STUDY ─── */
+
+.panel {
+  position: relative;
+  overflow: hidden;
+  background: var(--steam);
+}
+
+.panel-media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: var(--steam);
+}
+
+.panel-media canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.panel-caption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  padding: 14px 16px;
+  background: linear-gradient(to top, rgb(27 23 20 / 0.62), transparent);
+  color: var(--on-dark);
+}
+
+.panel-caption .label {
+  color: color-mix(in oklab, var(--on-dark) 76%, transparent);
+}
+
+.grain-oak,
+.grain-leather,
+.grain-plaster {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* ─── SCROLL / REVEAL ─── */
+
+.reduce-motion * {
+  animation-duration: 0.001ms !important;
+  transition-duration: 0.001ms !important;
+}
+
+.bleed-x {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+}
+
+/* ─── FORMS ─── */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.field-input {
+  width: 100%;
+  min-height: 54px;
+  padding: 14px 16px;
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--graphite);
+  background: transparent;
+  border: 1px solid color-mix(in oklab, var(--graphite) 26%, transparent);
+  border-radius: 0;
+  transition: border-color 0.35s var(--ease);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.field-input::placeholder {
+  color: var(--ink-46);
+}
+
+.field-input:focus {
+  border-color: var(--graphite);
+  outline: none;
+}
+
+.field-input:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+
+textarea.field-input {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.band-ink .field-input {
+  color: var(--on-dark);
+  border-color: color-mix(in oklab, var(--on-dark) 28%, transparent);
+}
+
+.band-ink .field-input:focus {
+  border-color: var(--on-dark);
+}
+
+.band-ink .field-input::placeholder {
+  color: color-mix(in oklab, var(--on-dark) 44%, transparent);
+}
+
+select.field-input {
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) calc(50% + 2px),
+    calc(100% - 14px) calc(50% + 2px);
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 44px;
+}
+
+.form-note {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-46);
+}
+
+.band-ink .form-note {
+  color: color-mix(in oklab, var(--on-dark) 52%, transparent);
+}
+
+/* ─── MOTION PRIMITIVES ─── */
+
+.magnetic {
+  transition: transform 0.5s var(--ease);
+}
+
+.stagger > * {
+  transition:
+    opacity 0.85s var(--ease-out),
+    transform 0.85s var(--ease-out);
+}
+
+.stagger-in > * {
+  opacity: 1;
+  transform: none;
+}
+
+.stagger-in > *:nth-child(1) { transition-delay: 0.04s; }
+.stagger-in > *:nth-child(2) { transition-delay: 0.12s; }
+.stagger-in > *:nth-child(3) { transition-delay: 0.2s; }
+.stagger-in > *:nth-child(4) { transition-delay: 0.28s; }
+.stagger-in > *:nth-child(5) { transition-delay: 0.36s; }
+.stagger-in > *:nth-child(6) { transition-delay: 0.44s; }
+.stagger-in > *:nth-child(7) { transition-delay: 0.52s; }
+.stagger-in > *:nth-child(8) { transition-delay: 0.6s; }
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 44s linear infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ─── UTILITY ─── */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -100px;
+  z-index: 100;
+  padding: 12px 18px;
+  background: var(--graphite);
+  color: var(--on-dark);
+  font-size: 13px;
+  text-decoration: none;
+  transition: top 0.3s var(--ease);
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* ─── TAP TARGETS (44px minimum, enforced on shared chrome) ─── */
+
+.tap {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.tap-block {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* ─── ENTRANCE PHYSICS (pattern 103's constants, as CSS) ─── */
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise-in {
+  animation: rise-in 0.4s ease-out both;
+}
+
+.rise-in-delay {
+  animation-delay: 0.08s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise-in,
+  .rise-in-delay {
+    animation: none;
+  }
+}
+
+}

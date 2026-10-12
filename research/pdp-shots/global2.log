@@ -1,0 +1,5 @@
+Navigating to https://www.global.kaiusa.com
+Error: net::ERR_CERT_COMMON_NAME_INVALID at https://www.global.kaiusa.com/
+Call log:
+[2m  - navigating to "https://www.global.kaiusa.com/", waiting until "load"[22m
+

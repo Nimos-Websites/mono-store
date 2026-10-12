@@ -1,0 +1,5 @@
+Navigating to https://www.material.kitchen
+Error: net::ERR_NAME_NOT_RESOLVED at https://www.material.kitchen/
+Call log:
+[2m  - navigating to "https://www.material.kitchen/", waiting until "load"[22m
+
